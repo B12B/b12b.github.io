@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boutheina Bahri — Software Engineer & AI Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #0d0f14;
+      --surface: #13161e;
+      --border:  rgba(255,255,255,.07);
+      --accent:  #7de8c8;
+      --accent2: #e8a87d;
+      --text:    #e8e6df;
+      --muted:   #7a7d8a;
+      --heading: 'DM Serif Display', Georgia, serif;
+      --mono:    'DM Mono', monospace;
+      --sans:    'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--sans); font-size: 16px; line-height: 1.75; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: .4;
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 80vw 60vh at 20% 10%, rgba(125,232,200,.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60vw 50vh at 80% 90%, rgba(232,168,125,.05) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .wrapper { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(14px) saturate(160%);
+      background: rgba(13,15,20,.7); border-bottom: 1px solid var(--border);
+    }
+    nav .inner {
+      max-width: 800px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between; height: 58px;
+    }
+    .logo { font-family: var(--mono); font-size: .85rem; font-weight: 500; color: var(--accent); letter-spacing: .04em; text-decoration: none; }
+    nav ul { list-style: none; display: flex; gap: 1.8rem; }
+    nav a { font-family: var(--mono); font-size: .75rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
+    nav a:hover { color: var(--text); }
+
+    /* HERO */
+    #hero { min-height: 92vh; display: flex; align-items: center; padding: 6rem 0 4rem; }
+    .eyebrow {
+      font-family: var(--mono); font-size: .78rem; font-weight: 400;
+      color: var(--accent); letter-spacing: .16em; text-transform: uppercase;
+      margin-bottom: 1.4rem; display: flex; align-items: center; gap: .75rem;
+    }
+    .eyebrow::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent); opacity: .7; }
+    h1 { font-family: var(--heading); font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1.06; color: var(--text); margin-bottom: .5rem; }
+    h1 em { font-style: italic; color: var(--accent); }
+    .subtitle { font-size: 1.05rem; color: var(--muted); max-width: 540px; margin: 1.4rem 0 2.4rem; line-height: 1.7; }
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: .6rem 1.4rem; border-radius: 6px; font-family: var(--mono); font-size: .82rem; font-weight: 500; letter-spacing: .05em; text-decoration: none; cursor: pointer; border: none; transition: all .22s; }
+    .btn-primary { background: var(--accent); color: #0d0f14; }
+    .btn-primary:hover { background: #a0f0d8; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* SECTION COMMONS */
+    section { padding: 5.5rem 0; }
+    .section-label { font-family: var(--mono); font-size: .72rem; font-weight: 400; color: var(--accent); letter-spacing: .2em; text-transform: uppercase; margin-bottom: .9rem; }
+    h2 { font-family: var(--heading); font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: var(--text); margin-bottom: 1.8rem; line-height: 1.2; }
+    .divider { width: 42px; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin-bottom: 2rem; }
+
+    /* ABOUT */
+    #about p { color: var(--muted); max-width: 640px; font-size: 1rem; line-height: 1.85; }
+    #about p + p { margin-top: 1.2rem; }
+    #about strong { color: var(--text); font-weight: 500; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--border);
+    }
+    .skill-card { background: var(--surface); padding: 1.4rem 1.5rem; transition: background .2s; }
+    .skill-card:hover { background: rgba(125,232,200,.06); }
+    .skill-icon { font-size: 1.3rem; margin-bottom: .7rem; }
+    .skill-name { font-family: var(--mono); font-size: .82rem; font-weight: 500; color: var(--text); margin-bottom: .35rem; }
+    .skill-desc { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+    /* EXPERIENCE */
+    #experience { border-top: 1px solid var(--border); }
+    .exp-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .exp-item {
+      display: grid; grid-template-columns: 1fr auto; gap: .3rem 1.5rem;
+      padding: 1.5rem; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px; transition: border-color .25s;
+    }
+    .exp-item:hover { border-color: rgba(125,232,200,.2); }
+    .exp-role { font-family: var(--heading); font-size: 1.1rem; color: var(--text); }
+    .exp-company { font-family: var(--mono); font-size: .78rem; color: var(--accent); margin-top: .15rem; }
+    .exp-period { font-family: var(--mono); font-size: .72rem; color: var(--muted); text-align: right; white-space: nowrap; padding-top: .3rem; }
+    .exp-desc { grid-column: 1 / -1; color: var(--muted); font-size: .9rem; line-height: 1.7; margin-top: .5rem; }
+
+    /* PROJECT */
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 2rem 2.2rem; position: relative; overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+    .project-card:hover { border-color: rgba(125,232,200,.25); transform: translateY(-3px); }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .project-badge { display: inline-block; font-family: var(--mono); font-size: .72rem; font-weight: 500; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; background: rgba(125,232,200,.09); border: 1px solid rgba(125,232,200,.2); border-radius: 4px; padding: .18rem .55rem; margin-bottom: 1rem; }
+    .project-title { font-family: var(--heading); font-size: 1.55rem; color: var(--text); margin-bottom: .7rem; line-height: 1.3; }
+    .project-desc { color: var(--muted); font-size: .95rem; line-height: 1.75; margin-bottom: 1rem; }
+    .project-highlights { margin-bottom: 1.4rem; }
+    .project-highlights li { color: var(--muted); font-size: .88rem; line-height: 1.65; padding-left: 1.2rem; position: relative; list-style: none; }
+    .project-highlights li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: .8rem; }
+    .project-highlights li + li { margin-top: .35rem; }
+    .tag-row { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+    .tag { font-family: var(--mono); font-size: .72rem; background: rgba(255,255,255,.04); border: 1px solid var(--border); color: var(--muted); padding: .18rem .55rem; border-radius: 4px; }
+    .project-links { display: flex; gap: .9rem; }
+
+    /* CONTACT */
+    #contact { border-top: 1px solid var(--border); text-align: center; }
+    #contact h2 { margin-bottom: .8rem; }
+    #contact .sub { color: var(--muted); font-size: .95rem; margin-bottom: 2rem; }
+    .contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .contact-link { font-family: var(--mono); font-size: .95rem; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(125,232,200,.3); padding-bottom: 2px; transition: border-color .2s; }
+    .contact-link:hover { border-color: var(--accent); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; }
+    footer p { font-family: var(--mono); font-size: .72rem; color: var(--muted); letter-spacing: .06em; }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 580px) {
+      nav ul { gap: 1rem; }
+      nav a { font-size: .68rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-period { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="#hero" class="logo">boutheina.dev</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div>
+        <p class="eyebrow">Open to new opportunities · Stockholm, Sweden</p>
+        <h1>Hi, I'm <em>Boutheina Bahri</em></h1>
+        <p class="subtitle">
+          Software Engineer with 12+ years building enterprise systems — now bridging deep Java
+          expertise with Python, machine learning, and AI-powered backend development.
+        </p>
+        <div class="cta-group">
+          <a href="#project" class="btn btn-primary">View my work</a>
+          <a href="https://linkedin.com/in/boutheina-bahri" target="_blank" class="btn btn-outline">LinkedIn →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <p class="section-label">About</p>
+      <h2>A little about me</h2>
+      <div class="divider"></div>
+      <p>
+        I'm a <strong>Software Engineer</strong> based in <strong>Stockholm, Sweden</strong>, with over
+        12 years of experience designing and delivering scalable enterprise applications in the insurance
+        and finance sectors. My career spans roles from full-stack developer to
+        <strong>IT Project Manager</strong>, leading distributed Agile teams and driving complex
+        Java-based systems from inception to delivery.
+      </p>
+      <p>
+        I'm currently completing the <strong>Advanced Training Program: System Developer Python and AI</strong>
+        at Lexicon IT in Stockholm — expanding into data science (Pandas, NumPy, Scikit-Learn) and
+        machine learning to architect the next generation of intelligent backend systems.
+      </p>
+      <p>
+        I hold an <strong>Engineer's Degree in Software Engineering</strong> (M.Sc. equivalent) from the
+        Faculty of Sciences of Tunis, and hold Oracle Java SE 6, PSM I, and PSPO I certifications.
+        Fluent in English, French, and Arabic — with Swedish underway.
+      </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <p class="section-label">Skills</p>
+      <h2>What I work with</h2>
+      <div class="divider"></div>
+      <div class="skills-grid fade-up">
+
+        <div class="skill-card">
+          <div class="skill-icon">☕</div>
+          <div class="skill-name">Java & Backend</div>
+          <div class="skill-desc">Java SE/EE, REST & SOAP APIs, RabbitMQ, Maven — 12 years enterprise depth.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🐍</div>
+          <div class="skill-name">Python & AI/ML</div>
+          <div class="skill-desc">Pandas, NumPy, Scikit-Learn, TensorFlow — EDA to production ML pipelines.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🌐</div>
+          <div class="skill-name">Web & Frameworks</div>
+          <div class="skill-desc">Django, Flask, REST APIs, HTML/CSS, JavaScript — full-stack web development.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🗄</div>
+          <div class="skill-name">Databases</div>
+          <div class="skill-desc">Oracle PL/SQL, PostgreSQL, MySQL, MongoDB, SQLite, Cosmos DB.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">☁️</div>
+          <div class="skill-name">Cloud & DevOps</div>
+          <div class="skill-desc">Azure, Docker, Git/GitLab, SonarQube, Jira, Confluence.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🏃</div>
+          <div class="skill-name">Agile Leadership</div>
+          <div class="skill-desc">Scrum Master (PSM I), Product Owner (PSPO I), team lead, cross-functional delivery.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <p class="section-label">Experience</p>
+      <h2>Where I've worked</h2>
+      <div class="divider"></div>
+      <div class="exp-list fade-up">
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">IT Project Manager</div>
+            <div class="exp-company">Vermeg · Tunis, Tunisia</div>
+          </div>
+          <div class="exp-period">2021 – 2024</div>
+          <p class="exp-desc">Led end-to-end delivery of complex Java-based enterprise applications for finance and insurance clients. Coordinated distributed Agile (Scrum) teams, managed budgets and risks, and streamlined deployment workflows using GitLab and Sonar.</p>
+        </div>
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">SE Team Lead</div>
+            <div class="exp-company">Vermeg · Tunis, Tunisia</div>
+          </div>
+          <div class="exp-period">2018 – 2020</div>
+          <p class="exp-desc">Led a team of 5 engineers, designed highly scalable RESTful APIs, and built a new framework module handling SIGEDIS declarations via RabbitMQ. Drove the team's Agile transition, measurably increasing feature delivery throughput.</p>
+        </div>
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">IT Analyst</div>
+            <div class="exp-company">Vermeg · Tunis, Tunisia</div>
+          </div>
+          <div class="exp-period">2015 – 2017</div>
+          <p class="exp-desc">Business analysis, complex Oracle SQL, SOAP web services, and batch data migration jobs for critical financial system modules.</p>
+        </div>
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">Full Stack Developer</div>
+            <div class="exp-company">KNSD · Tunis, Tunisia</div>
+          </div>
+          <div class="exp-period">2012 – 2015</div>
+          <p class="exp-desc">Built high-traffic web applications (PHP, MySQL, Node.js), Facebook Graph API integrations, and real-time social games for web platforms.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECT -->
+    <section id="project">
+      <p class="section-label">Featured Project</p>
+      <h2>Titanic++ — ML Survival Predictor</h2>
+      <div class="divider"></div>
+      <div class="project-card fade-up">
+        <span class="project-badge">Capstone · Open Source</span>
+        <h3 class="project-title">End-to-End Machine Learning System</h3>
+        <p class="project-desc">
+          A full production-grade ML system that turns raw Titanic passenger data into real-time
+          survival predictions via a deployed Django web application — simulating the complete
+          professional ML lifecycle from raw data to live product.
+        </p>
+        <ul class="project-highlights">
+          <li>Engineered 4 novel features: Title extraction, FamilySize, IsAlone flag, and CabinDeck — each backed by EDA insights</li>
+          <li>Built a custom <code>GroupImputer</code> Scikit-Learn transformer for title-based age imputation, ensuring training and production logic are identical</li>
+          <li>Benchmarked 4 models (Logistic Regression, Random Forest, SVM, Gradient Boosting) — selected HistGradientBoostingClassifier at 83.79% accuracy / 0.80 F1</li>
+          <li>Serialized the full pipeline (.pkl) into a Django app with PostgreSQL persistence, secure user auth (argon2), prediction history with confidence scores</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-Learn</span>
+          <span class="tag">Pandas / NumPy</span>
+          <span class="tag">Django</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Gradient Boosting</span>
+          <span class="tag">Feature Engineering</span>
+          <span class="tag">Git / GitHub</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/B12B/Titanic" target="_blank" class="btn btn-primary">GitHub repo →</a>
+          <a href="#contact" class="btn btn-outline">Ask me about it</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <p class="section-label">Contact</p>
+      <h2>Let's connect</h2>
+      <p class="sub">Open to software engineering, AI/ML, and backend roles in Stockholm and beyond.</p>
+      <div class="contact-links">
+        <a href="mailto:boutheina.bahri@gmail.com" class="contact-link">boutheina.bahri@gmail.com</a>
+        <a href="https://linkedin.com/in/boutheina-bahri" target="_blank" class="contact-link">LinkedIn</a>
+        <a href="https://github.com/B12B" target="_blank" class="contact-link">GitHub</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="wrapper">
+      <p>Built with HTML · Deployed on GitHub Pages · © 2025 Boutheina Bahri · Stockholm, Sweden</p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
